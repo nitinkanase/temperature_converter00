@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temperature Converter</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #FFA500;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  #converter {
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+</style>
+</head>
+<body>
+  <div id="converter">
+    <h2>Temperature Converter</h2>
+    <label for="inputTemp">Enter Temperature:</label>
+    <input type="number" id="inputTemp">
+    <select id="inputUnit">
+      <option value="celsius">Celsius</option>
+      <option value="fahrenheit">Fahrenheit</option>
+      <option value="kelvin">Kelvin</option>
+    </select>
+    <button onclick="convertTemperature()">Convert</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    function convertTemperature() {
+      const inputTemp = parseFloat(document.getElementById('inputTemp').value);
+      const inputUnit = document.getElementById('inputUnit').value;
+      const resultElement = document.getElementById('result');
+
+      let celsius, fahrenheit, kelvin;
+
+      switch (inputUnit) {
+        case 'celsius':
+          celsius = inputTemp;
+          fahrenheit = (celsius * 9/5) + 32;
+          kelvin = celsius + 273.15;
+          break;
+        case 'fahrenheit':
+          fahrenheit = inputTemp;
+          celsius = (fahrenheit - 32) * 5/9;
+          kelvin = celsius + 273.15;
+          break;
+        case 'kelvin':
+          kelvin = inputTemp;
+          celsius = kelvin - 273.15;
+          fahrenheit = (celsius * 9/5) + 32;
+          break;
+      }
+
+      resultElement.innerHTML = `
+        ${celsius.toFixed(2)} Celsius<br>
+        ${fahrenheit.toFixed(2)} Fahrenheit<br>
+        ${kelvin.toFixed(2)} Kelvin
+      `;
+    }
+  </script>
+</body>
+</html>
